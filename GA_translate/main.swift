@@ -8,6 +8,7 @@
 import Foundation
 
 let pi = 3.14159
+// 种群个体
 struct Individual:Comparable{
     static func < (lhs: Individual, rhs: Individual) -> Bool {
         return lhs.fitness <= rhs.fitness
@@ -16,9 +17,9 @@ struct Individual:Comparable{
     static var minArray:[Double] = []
     static var maxArray:[Double] = []
     static var stepArray:[Double] = []
-    static var fun:(([Double])->(Double))!
+    static var fun:(([Double])->(Double))! // 优化函数
     private static var gl:[Int]?
-    static var genelengthes:[Int]{
+    static var genelengthes:[Int]{ // 每个变量的二进制长度
         if gl == nil{
             gl = []
             for i in 0..<minArray.count{
@@ -33,9 +34,11 @@ struct Individual:Comparable{
         }
         return gl!
     }
-    var gene_decimal:[Double] = []
-    var gene_binary:[Int8] = []
-    var fitness:Double = 0
+    var gene_decimal:[Double] = [] // 十进制基因
+    var gene_binary:[Int8] = [] // 二进制基因
+    var fitness:Double = 0 // 适应度值
+    
+    /// 二进制转十进制
     mutating func binary2decimal() {
         var indexOfGene = 0
         var currentGeneIndex = 0
@@ -50,6 +53,8 @@ struct Individual:Comparable{
             currentGeneIndex += lenth
         }
     }
+    
+    /// 十进制转二进制
     mutating func decimal2binary(){
         var currentGeneIndex = 0
         for i in 0..<gene_decimal.count {
@@ -62,12 +67,15 @@ struct Individual:Comparable{
             currentGeneIndex = currentGeneIndex + length
         }
     }
+    
+    /// 计算适应度值
     mutating func caculateFitness(){
         self.fitness = Individual.fun(gene_decimal)
         if self.fitness.isNaN {
             self.fitness = 0
         }
     }
+    
     func toString() -> String {
         var str = "param: "
         for g in gene_decimal {
@@ -79,6 +87,8 @@ struct Individual:Comparable{
         
         return str
     }
+    
+    /// 随机生成满足要求的个体
     init() {
         while true{
             for i in 0..<Individual.minArray.count {
@@ -96,6 +106,8 @@ struct Individual:Comparable{
         }
         self.caculateFitness()
     }
+    
+    /// 检查参数是否合理
     func paramIsFit() -> Bool{
         guard self.gene_decimal.count > 0 else {
             return false
@@ -108,6 +120,8 @@ struct Individual:Comparable{
         return true
     }
 }
+
+/// 优化参数
 struct GAOption {
     var crossRate:Double = 0.02
     var mutateRate:Double = 0.001
@@ -116,11 +130,22 @@ struct GAOption {
     var selectType = 1 // 轮盘赌
     
 }
+
 class GeneAAlgorithm {
     var population:[Individual] = [];
     var option:GAOption!
-    var fitness:Individual!
+    var fitness:Individual! // 当前最好的个体
     
+    /// 计算最大值
+    ///
+    /// - Parameters:
+    ///   - fun: 优化函数
+    ///   - numberOfParam: 参数个数
+    ///   - minArray: 最小值数组
+    ///   - maxArray: 最大值数组
+    ///   - stepArray: 步长数组
+    ///   - option: 优化参数
+    /// - Returns: 最优个体
     func ga(fun:@escaping ([Double])->(Double),numberOfParam: Int,minArray:[Double] = [],maxArray:[Double] = [],stepArray:[Double] = [],option: GAOption = GAOption()) -> (Individual) {
         guard minArray.count == maxArray.count && minArray.count == stepArray.count else {
             
@@ -271,6 +296,7 @@ class GeneAAlgorithm {
 
 }
 
+// 测试代码
 let ga  = GeneAAlgorithm()
 let re = ga.ga(fun: { (x) -> (Double) in
     return 21.5 + x[0] * sin(4 * pi * x[0]) + x[1] * sin(20 * pi * x[1])
