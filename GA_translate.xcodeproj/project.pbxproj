@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB7B0DA6227311A4006185BF /* InputParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7B0DA5227311A4006185BF /* InputParam.swift */; };
+		FB7B0DD322732A59006185BF /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7B0DD222732A59006185BF /* Extension.swift */; };
+		FB7B0DD522732CA3006185BF /* TestFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7B0DD422732CA3006185BF /* TestFunc.swift */; };
+		FB7B0DD72273349D006185BF /* EvolutionaryStrategies.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7B0DD62273349D006185BF /* EvolutionaryStrategies.swift */; };
 		FB932323226DB947000FE6F1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB932322226DB947000FE6F1 /* main.swift */; };
 		FB93232A226DDE3F000FE6F1 /* Matlab_ga.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB932329226DDE3F000FE6F1 /* Matlab_ga.swift */; };
+		FBC7DDF0227151E3008A8226 /* SimpleGeneticAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7DDEF227151E3008A8226 /* SimpleGeneticAlgorithm.swift */; };
+		FBC7DDF2227194DC008A8226 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC7DDF1227194DC008A8226 /* Random.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,9 +30,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FB7B0DA5227311A4006185BF /* InputParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputParam.swift; sourceTree = "<group>"; };
+		FB7B0DD222732A59006185BF /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		FB7B0DD422732CA3006185BF /* TestFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFunc.swift; sourceTree = "<group>"; };
+		FB7B0DD62273349D006185BF /* EvolutionaryStrategies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvolutionaryStrategies.swift; sourceTree = "<group>"; };
 		FB93231F226DB947000FE6F1 /* GA_translate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GA_translate; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB932322226DB947000FE6F1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FB932329226DDE3F000FE6F1 /* Matlab_ga.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matlab_ga.swift; sourceTree = "<group>"; };
+		FBC7DDEF227151E3008A8226 /* SimpleGeneticAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleGeneticAlgorithm.swift; sourceTree = "<group>"; };
+		FBC7DDF1227194DC008A8226 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +73,12 @@
 			children = (
 				FB932322226DB947000FE6F1 /* main.swift */,
 				FB932329226DDE3F000FE6F1 /* Matlab_ga.swift */,
+				FBC7DDEF227151E3008A8226 /* SimpleGeneticAlgorithm.swift */,
+				FBC7DDF1227194DC008A8226 /* Random.swift */,
+				FB7B0DA5227311A4006185BF /* InputParam.swift */,
+				FB7B0DD222732A59006185BF /* Extension.swift */,
+				FB7B0DD422732CA3006185BF /* TestFunc.swift */,
+				FB7B0DD62273349D006185BF /* EvolutionaryStrategies.swift */,
 			);
 			path = GA_translate;
 			sourceTree = "<group>";
@@ -122,8 +140,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB7B0DD522732CA3006185BF /* TestFunc.swift in Sources */,
+				FBC7DDF2227194DC008A8226 /* Random.swift in Sources */,
 				FB93232A226DDE3F000FE6F1 /* Matlab_ga.swift in Sources */,
+				FB7B0DD72273349D006185BF /* EvolutionaryStrategies.swift in Sources */,
 				FB932323226DB947000FE6F1 /* main.swift in Sources */,
+				FB7B0DD322732A59006185BF /* Extension.swift in Sources */,
+				FB7B0DA6227311A4006185BF /* InputParam.swift in Sources */,
+				FBC7DDF0227151E3008A8226 /* SimpleGeneticAlgorithm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
