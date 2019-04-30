@@ -7,6 +7,9 @@
 //
 
 import Foundation
+
+
+/// 定义方便的形式指数
 func ^ (l:Double, r: Double) -> Double {
     return pow(l, r)
 }

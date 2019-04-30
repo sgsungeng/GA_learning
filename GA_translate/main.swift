@@ -9,11 +9,11 @@ import Foundation
 
 let testF = getTestFun()
 
-let ga = GeneAlgorithm()
+let op = ESOptimize()
 for t in testF{
-    var maxm = Double(Int.min)
-    for _ in 0..<10{
-        maxm = max(ga.ga(inputP: t).fitness.fitness,maxm)
-    }
+    var maxm = op.optimiz(inputParam: t).fitness.fitness //Double(Int.min)
+//    for _ in 0..<10{
+//        maxm = max(op.optimiz(inputParam: t).fitness.fitness,maxm)
+//    }
     print(maxm)
 }

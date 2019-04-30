@@ -10,7 +10,21 @@ import Foundation
 
 fileprivate let pi = 3.14159
 // 种群个体
-struct Individual:Comparable{
+struct Individual:Comparable,CustomStringConvertible{
+    var description: String{
+        get{
+            var str = "param: "
+            for g in gene_decimal {
+                str += g.description
+                str += " "
+            }
+            str += "\nfitness: "
+            str += self.fitness.description
+            
+            return str
+        }
+    }
+    
     static func < (lhs: Individual, rhs: Individual) -> Bool {
         return lhs.fitness <= rhs.fitness
     }
@@ -75,17 +89,6 @@ struct Individual:Comparable{
         }
     }
     
-    func toString() -> String {
-        var str = "param: "
-        for g in gene_decimal {
-            str += g.description
-            str += " "
-        }
-        str += "\nfitness: "
-        str += self.fitness.description
-        
-        return str
-    }
     
     /// 随机生成满足要求的个体
     init() {
@@ -145,7 +148,7 @@ class GeneAlgorithm {
     ///   - stepArray: 步长数组
     ///   - option: 优化参数
     /// - Returns: 最优个体
-    func ga(inputP:GAInputParam,option: GAOption = GAOption()) -> (fitness:Individual,population: [Individual]) {
+    func ga(inputP:OPInputParam,option: GAOption = GAOption()) -> (fitness:Individual,population: [Individual]) {
         Individual.minArray = inputP.minArray
         Individual.maxArray = inputP.maxArray
         Individual.stepArray = inputP.stepArray
