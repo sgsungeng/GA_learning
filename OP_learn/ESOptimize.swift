@@ -11,6 +11,8 @@ import Foundation
 fileprivate let e = 2.718281828459
 class ESIndividual: OPIndividual {
     var standardDeviation:[Double] = []
+    var p1:Double = 200
+    static var pool = [ESIndividual]() // 缓存池避免多次创建
     init(isGenerateArgum: Bool = false) {
         super.init()
         if isGenerateArgum {
@@ -25,18 +27,43 @@ class ESIndividual: OPIndividual {
                     self.argument.removeAll()
                 }
             }
-            self.standardDeviation = Random.getNormalDistributions(count: ESIndividual.numberOfArgument)
+            self.standardDeviation = Random.getNormalDistributions(count: ESIndividual.numberOfArgument).map({ (a) -> Double in
+                return a > 0 ? a: -a
+            })
             self.caculateFitness()
         }
     }
-    func  productChild(count: Int) -> [ESIndividual] {
-        let re = [ESIndividual](repeating: ESIndividual(), count: count)
+    func  productChild(count: Int,success: Double) -> [ESIndividual] {
+        var re = [ESIndividual]()
         
-        for item in re {
+        for _ in 0..<count {
+            var item:ESIndividual!
+            if !ESIndividual.pool.isEmpty{
+                item = ESIndividual.pool.popLast()
+            }else{
+                item = ESIndividual()
+            }
+            for i in 0..<ESIndividual.numberOfArgument{
+                var sigma = self.standardDeviation[i]
+                if success - 0.2 > 0.00000001{
+                    sigma *= 1.22
+                }else if success - 0.2 < 0.00000001{
+                    sigma *= 0.82
+                }
+                if item.standardDeviation.count > i { // 各项异性变异算子
+                    item.standardDeviation[i] = sigma
+                }else{
+                    item.standardDeviation.append(sigma)
+                }
+            }
             while true{
                 for i in 0..<ESIndividual.numberOfArgument{
-                    
-                    item.argument.append(Random.getUniformDistribution(min: ESIndividual.minAndMax.min[i], max: ESIndividual.minAndMax.max[i]))
+                    let newValue = self.argument[i] + item.standardDeviation[i] * Random.getNormalDistribution()
+                    if item.argument.count > i {
+                        item.argument[i] = newValue
+                    }else{
+                        item.argument.append(newValue)
+                    }
                 }
                 if item.isFitRestrain(){
                     break
@@ -44,23 +71,28 @@ class ESIndividual: OPIndividual {
                     item.argument.removeAll()
                 }
             }
-            for i in 0..<ESIndividual.numberOfArgument{
-                item.standardDeviation.append(self.standardDeviation[i] * e^Random.getUniformDistribution())
-            }
+            re.append(item)
         }
         for item in re {
             item.caculateFitness()
         }
         return re
     }
+    static func cachePool(popu:[ESIndividual]){
+        ESIndividual.pool = popu
+        
+    }
 }
 class ESOption: OPOption {
     var parentNum = 20
     var sonNumMulit = 7
-    
+    var c_i = 1.22 //1/5成功法则参数
+    var c_d = 0.82
 }
 
 class ESOptimize: Optimizer {
+    var fitMax:ESIndividual!
+    var sucssTime = 0.0
     func optimiz(inputParam: OPInputParam) -> (fitness: OPIndividual, population: [OPIndividual], exitInfo: OPExitInfo) {
         var  restrain = inputParam.otherRestrain
         for item in inputParam.minArray.enumerated() {
@@ -104,13 +136,19 @@ class ESOptimize: Optimizer {
         ESIndividual.restrain = restrain
         ESIndividual.aimfunc = aimFunc
         ESIndividual.numberOfArgument = argumNum
+        self.sucssTime = 0
         self.population.removeAll()
         self.sonPopulation.removeAll()
         let option = option as! ESOption
-        for _ in 0..<option.cycleTimes {
-            generalPopulation(count: option.parentNum)
-            mutating(multi: option.sonNumMulit)
+        generalPopulation(count: option.parentNum)
+        for index in 0..<option.cycleTimes {
+            var ss = 0.2
+            if index > 50{
+                ss = self.sucssTime / Double(index)
+            }
+            mutating(multi: option.sonNumMulit, success: ss)
             select(count: option.parentNum)
+//            print("第" + index.description + "代，最优值是：" + self.fitMax.fitness.description)
         }
         
         return (self.population[0],self.population,OPExitInfo())
@@ -127,16 +165,24 @@ class ESOptimize: Optimizer {
             population.append(ESIndividual(isGenerateArgum: true))
         }
     }
-    private func mutating(multi: Int) {
-        sonPopulation.removeAll()
+    private func mutating(multi: Int, success: Double) {
+        ESIndividual.cachePool(popu: sonPopulation)
+        sonPopulation = [ESIndividual]()
         for i in 0..<population.count {
-            sonPopulation += population[i].productChild(count: multi)
+            sonPopulation += population[i].productChild(count: multi,success: success)
         }
-        
     }
-    private func select(count: Int) {
+    func select(count: Int) {
         self.sonPopulation += self.population
         self.sonPopulation.sort(by: >)
         self.population = Array(self.sonPopulation[0..<count])
+        if let m = self.fitMax{
+            if self.population[0].fitness > m.fitness{
+                sucssTime += 1
+            }
+        }else{
+            sucssTime += 1
+        }
+        self.fitMax = self.population[0]
     }
 }

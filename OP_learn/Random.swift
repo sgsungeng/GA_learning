@@ -55,11 +55,10 @@ class Random {
     /// 产生单个服从正态分布的变量
     ///
     /// - Parameters:
-    ///   - count: <#count description#>
     ///   - meanValue: <#meanValue description#>
     ///   - standardDeviation: <#standardDeviation description#>
     /// - Returns: <#return value description#>
-    static func getNormalDistribution(count: Int, meanValue: Double = 0,standardDeviation:Double = 1.0)->Double{
+    static func getNormalDistribution( meanValue: Double = 0,standardDeviation:Double = 1.0)->Double{
         let x = getUniformDistribution()
         let y = getUniformDistribution()
         let z = pow(-2*log(x),0.5) * cos(2 * pi * y)

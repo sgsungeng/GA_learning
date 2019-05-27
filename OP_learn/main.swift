@@ -10,10 +10,15 @@ import Foundation
 let testF = getTestFun()
 
 let op = ESOptimize()
+//let a = Random.getNormalDistribution()
+//print(a)
 for t in testF{
-    var maxm = op.optimiz(inputParam: t).fitness.fitness //Double(Int.min)
+    var maxm = op.optimiz(inputParam: t).fitness //Double(Int.min)
 //    for _ in 0..<10{
 //        maxm = max(op.optimiz(inputParam: t).fitness.fitness,maxm)
 //    }
-    print(maxm)
+    
+    print(maxm.fitness)
+    print(maxm.isFitRestrain())
+    print(maxm.argument)
 }

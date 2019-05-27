@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:GA_translate.xcodeproj">
+      location = "self:/Volumes/MacintoshHD/Xcode_test/GA_translate/OP_learn.xcodeproj">
    </FileRef>
 </Workspace>

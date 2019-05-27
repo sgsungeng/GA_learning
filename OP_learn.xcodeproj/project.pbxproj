@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB10522C229A7988007B0A93 /* EPOptimize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10522B229A7988007B0A93 /* EPOptimize.swift */; };
 		FB1E2E562274898B008AA6F0 /* ESOptimize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E2E552274898B008AA6F0 /* ESOptimize.swift */; };
 		FB7B0DD322732A59006185BF /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7B0DD222732A59006185BF /* Extension.swift */; };
 		FB7B0DD522732CA3006185BF /* TestFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7B0DD422732CA3006185BF /* TestFunc.swift */; };
@@ -30,10 +31,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FB10522B229A7988007B0A93 /* EPOptimize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPOptimize.swift; sourceTree = "<group>"; };
 		FB1E2E552274898B008AA6F0 /* ESOptimize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESOptimize.swift; sourceTree = "<group>"; };
 		FB7B0DD222732A59006185BF /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		FB7B0DD422732CA3006185BF /* TestFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFunc.swift; sourceTree = "<group>"; };
-		FB93231F226DB947000FE6F1 /* GA_translate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GA_translate; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB93231F226DB947000FE6F1 /* OP_learn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OP_learn; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB932322226DB947000FE6F1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FB932329226DDE3F000FE6F1 /* Matlab_ga.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matlab_ga.swift; sourceTree = "<group>"; };
 		FB954FEF227417D0008DDEE5 /* Optimize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optimize.swift; sourceTree = "<group>"; };
@@ -55,7 +57,7 @@
 		FB932316226DB947000FE6F1 = {
 			isa = PBXGroup;
 			children = (
-				FB932321226DB947000FE6F1 /* GA_translate */,
+				FB932321226DB947000FE6F1 /* OP_learn */,
 				FB932320226DB947000FE6F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,12 +65,12 @@
 		FB932320226DB947000FE6F1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FB93231F226DB947000FE6F1 /* GA_translate */,
+				FB93231F226DB947000FE6F1 /* OP_learn */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FB932321226DB947000FE6F1 /* GA_translate */ = {
+		FB932321226DB947000FE6F1 /* OP_learn */ = {
 			isa = PBXGroup;
 			children = (
 				FB932322226DB947000FE6F1 /* main.swift */,
@@ -79,16 +81,17 @@
 				FB7B0DD422732CA3006185BF /* TestFunc.swift */,
 				FB954FEF227417D0008DDEE5 /* Optimize.swift */,
 				FB1E2E552274898B008AA6F0 /* ESOptimize.swift */,
+				FB10522B229A7988007B0A93 /* EPOptimize.swift */,
 			);
-			path = GA_translate;
+			path = OP_learn;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FB93231E226DB947000FE6F1 /* GA_translate */ = {
+		FB93231E226DB947000FE6F1 /* OP_learn */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FB932326226DB947000FE6F1 /* Build configuration list for PBXNativeTarget "GA_translate" */;
+			buildConfigurationList = FB932326226DB947000FE6F1 /* Build configuration list for PBXNativeTarget "OP_learn" */;
 			buildPhases = (
 				FB93231B226DB947000FE6F1 /* Sources */,
 				FB93231C226DB947000FE6F1 /* Frameworks */,
@@ -98,9 +101,9 @@
 			);
 			dependencies = (
 			);
-			name = GA_translate;
+			name = OP_learn;
 			productName = GA_translate;
-			productReference = FB93231F226DB947000FE6F1 /* GA_translate */;
+			productReference = FB93231F226DB947000FE6F1 /* OP_learn */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -118,7 +121,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FB93231A226DB947000FE6F1 /* Build configuration list for PBXProject "GA_translate" */;
+			buildConfigurationList = FB93231A226DB947000FE6F1 /* Build configuration list for PBXProject "OP_learn" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -130,7 +133,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FB93231E226DB947000FE6F1 /* GA_translate */,
+				FB93231E226DB947000FE6F1 /* OP_learn */,
 			);
 		};
 /* End PBXProject section */
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB10522C229A7988007B0A93 /* EPOptimize.swift in Sources */,
 				FB7B0DD522732CA3006185BF /* TestFunc.swift in Sources */,
 				FBC7DDF2227194DC008A8226 /* Random.swift in Sources */,
 				FB93232A226DDE3F000FE6F1 /* Matlab_ga.swift in Sources */,
@@ -292,7 +296,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FB93231A226DB947000FE6F1 /* Build configuration list for PBXProject "GA_translate" */ = {
+		FB93231A226DB947000FE6F1 /* Build configuration list for PBXProject "OP_learn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FB932324226DB947000FE6F1 /* Debug */,
@@ -301,7 +305,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FB932326226DB947000FE6F1 /* Build configuration list for PBXNativeTarget "GA_translate" */ = {
+		FB932326226DB947000FE6F1 /* Build configuration list for PBXNativeTarget "OP_learn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FB932327226DB947000FE6F1 /* Debug */,
