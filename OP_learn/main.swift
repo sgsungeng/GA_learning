@@ -9,11 +9,11 @@ import Foundation
 
 let testF = getTestFun()
 
-let op = ESOptimize()
+let op = DEOptimize()
 //let a = Random.getNormalDistribution()
 //print(a)
 for t in testF{
-    var maxm = op.optimiz(inputParam: t).fitness //Double(Int.min)
+    let maxm = op.optimiz(inputParam: t).fitness //Double(Int.min)
 //    for _ in 0..<10{
 //        maxm = max(op.optimiz(inputParam: t).fitness.fitness,maxm)
 //    }

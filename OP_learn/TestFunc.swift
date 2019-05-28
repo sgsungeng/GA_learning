@@ -9,6 +9,10 @@
 import Foundation
 
 fileprivate let pi = Double.pi
+
+/// 构造优化目标
+///
+/// - Returns: 优化目标
 func getTestFun() -> [OPInputParam] {
     var testFunc = [OPInputParam]()
     // 函数1
@@ -61,3 +65,6 @@ func getTestFun() -> [OPInputParam] {
     }, numberOfParam: 2, minArray: [-5.12,-5.12], maxArray: [5.12,5.12]))
     return testFunc
 }
+
+
+

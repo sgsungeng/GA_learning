@@ -13,7 +13,7 @@ class ESIndividual: OPIndividual {
     var standardDeviation:[Double] = []
     var p1:Double = 200
     static var pool = [ESIndividual]() // 缓存池避免多次创建
-    init(isGenerateArgum: Bool = false) {
+    override init(isGenerateArgum: Bool = false) {
         super.init()
         if isGenerateArgum {
             while true{
@@ -84,8 +84,6 @@ class ESIndividual: OPIndividual {
     }
 }
 class ESOption: OPOption {
-    var parentNum = 20
-    var sonNumMulit = 7
     var c_i = 1.22 //1/5成功法则参数
     var c_d = 0.82
 }
@@ -93,45 +91,10 @@ class ESOption: OPOption {
 class ESOptimize: Optimizer {
     var fitMax:ESIndividual!
     var sucssTime = 0.0
-    func optimiz(inputParam: OPInputParam) -> (fitness: OPIndividual, population: [OPIndividual], exitInfo: OPExitInfo) {
-        var  restrain = inputParam.otherRestrain
-        for item in inputParam.minArray.enumerated() {
-            restrain.append { (p) -> Bool in
-                return p[item.offset] > item.element
-                
-            }
-        }
-        for item in inputParam.maxArray.enumerated() {
-            restrain.append { (p) -> Bool in
-                return p[item.offset] < item.element
-                
-            }
-        }
-        if let unequalA = inputParam.unEqualArrayA,let unequalB = inputParam.unEqualArrayB {
-            for item in unequalA.enumerated(){
-                if let ele =  item.element{
-                    restrain.append { (p) -> Bool in
-                        return ele * p[item.offset] - unequalB[item.offset]! > 0
-                    }
-                }
-                
-            }
-        }
-        if let equalA = inputParam.EqualArrayA, let equalB = inputParam.EqualArrayB {
-            for item in equalA.enumerated(){
-                if let ele =  item.element{
-                    restrain.append { (p) -> Bool in
-                        return ele * p[item.offset] - equalB[item.offset]! == 0
-                    }
-                }
-                
-            }
-        }
-        return self.optimiz(aimFunc: inputParam.fun, restrain: restrain, minAndMax: (inputParam.minArray,inputParam.maxArray), argumNum: inputParam.numberOfVar)
+    override func optimiz(inputParam: OPInputParam) -> (fitness: OPIndividual, population: [OPIndividual], exitInfo: OPExitInfo) {
+        return self.optimiz(aimFunc: inputParam.fun, restrain: self.convert(inputParam: inputParam), minAndMax: (inputParam.minArray,inputParam.maxArray), argumNum: inputParam.numberOfVar,option: ESOption())
     }
-    
-    
-    func optimiz(aimFunc: @escaping ([Double]) -> (Double), restrain: [(([Double]) -> (Bool))], minAndMax: ([Double], [Double]), argumNum: Int, option: OPOption = ESOption()) -> (fitness: OPIndividual, population: [OPIndividual], exitInfo: OPExitInfo) {
+    override func optimiz(aimFunc: @escaping ([Double]) -> (Double), restrain: [(([Double]) -> (Bool))], minAndMax: ([Double], [Double]), argumNum: Int, option: OPOption = ESOption()) -> (fitness: OPIndividual, population: [OPIndividual], exitInfo: OPExitInfo) {
         ESIndividual.minAndMax = minAndMax
         ESIndividual.restrain = restrain
         ESIndividual.aimfunc = aimFunc
@@ -160,16 +123,16 @@ class ESOptimize: Optimizer {
     var population = [ESIndividual]()
     var sonPopulation = [ESIndividual]()
     
-    private func generalPopulation(count:Int) {
+    func generalPopulation(count:Int) {
         for _ in 0..<count {
             population.append(ESIndividual(isGenerateArgum: true))
         }
     }
-    private func mutating(multi: Int, success: Double) {
-        ESIndividual.cachePool(popu: sonPopulation)
+    func mutating(multi: Int, success: Double) {
+        EPIndividual.cachePool(popu: sonPopulation)
         sonPopulation = [ESIndividual]()
-        for i in 0..<population.count {
-            sonPopulation += population[i].productChild(count: multi,success: success)
+        for item in population {
+            sonPopulation += item.productChild(count: multi,success: success)
         }
     }
     func select(count: Int) {

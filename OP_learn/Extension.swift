@@ -17,3 +17,10 @@ precedencegroup Precedenc{
 func ^ (l:Double, r: Double) -> Double {
     return pow(l, r)
 }
+
+func * (l:Double,r: Int)->Double{
+    return Double(r) * l
+}
+func * (l:Int,r: Double)->Double{
+    return Double(l) * r
+}

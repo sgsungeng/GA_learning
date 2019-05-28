@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FB10522C229A7988007B0A93 /* EPOptimize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB10522B229A7988007B0A93 /* EPOptimize.swift */; };
 		FB1E2E562274898B008AA6F0 /* ESOptimize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E2E552274898B008AA6F0 /* ESOptimize.swift */; };
+		FB3E6CEE229B912100B5E1F3 /* DifferentialEvolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3E6CED229B912100B5E1F3 /* DifferentialEvolution.swift */; };
 		FB7B0DD322732A59006185BF /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7B0DD222732A59006185BF /* Extension.swift */; };
 		FB7B0DD522732CA3006185BF /* TestFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7B0DD422732CA3006185BF /* TestFunc.swift */; };
 		FB932323226DB947000FE6F1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB932322226DB947000FE6F1 /* main.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		FB10522B229A7988007B0A93 /* EPOptimize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPOptimize.swift; sourceTree = "<group>"; };
 		FB1E2E552274898B008AA6F0 /* ESOptimize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESOptimize.swift; sourceTree = "<group>"; };
+		FB3E6CED229B912100B5E1F3 /* DifferentialEvolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferentialEvolution.swift; sourceTree = "<group>"; };
 		FB7B0DD222732A59006185BF /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		FB7B0DD422732CA3006185BF /* TestFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFunc.swift; sourceTree = "<group>"; };
 		FB93231F226DB947000FE6F1 /* OP_learn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OP_learn; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +84,7 @@
 				FB954FEF227417D0008DDEE5 /* Optimize.swift */,
 				FB1E2E552274898B008AA6F0 /* ESOptimize.swift */,
 				FB10522B229A7988007B0A93 /* EPOptimize.swift */,
+				FB3E6CED229B912100B5E1F3 /* DifferentialEvolution.swift */,
 			);
 			path = OP_learn;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				FB7B0DD522732CA3006185BF /* TestFunc.swift in Sources */,
 				FBC7DDF2227194DC008A8226 /* Random.swift in Sources */,
 				FB93232A226DDE3F000FE6F1 /* Matlab_ga.swift in Sources */,
+				FB3E6CEE229B912100B5E1F3 /* DifferentialEvolution.swift in Sources */,
 				FB932323226DB947000FE6F1 /* main.swift in Sources */,
 				FB7B0DD322732A59006185BF /* Extension.swift in Sources */,
 				FBC7DDF0227151E3008A8226 /* SimpleGeneticAlgorithm.swift in Sources */,

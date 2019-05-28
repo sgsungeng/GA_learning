@@ -55,18 +55,42 @@ class OPIndividual:Comparable,CustomStringConvertible {
     func caculateFitness() {
         self.fitness = OPIndividual.aimfunc(self.argument)
     }
-    
+    init(isGenerateArgum: Bool = false) {
+        if isGenerateArgum {
+            while true{
+                for i in 0..<OPIndividual.numberOfArgument{
+                    
+                    self.argument.append(Random.getUniformDistribution(min: OPIndividual.minAndMax.min[i], max: OPIndividual.minAndMax.max[i]))
+                }
+                if self.isFitRestrain(){
+                    break
+                }else{
+                    self.argument.removeAll()
+                }
+            }
+            self.caculateFitness()
+        }
+    }
 }
 
 enum ExitFlag {
     case timesOver // 迭代次数完成
     case minEqualToMax // 最小值等于最大值
     case _50TimesNoChange // 50次循环最优解没有变化
-    
 }
 
 class OPOption {
     var cycleTimes = 300
+    var parentNum = 20
+    var sonNumMulit = 7
+    init() {
+        
+    }
+    init(cycleTimes: Int,parentNum: Int, sonNumMulit: Int) {
+        self.cycleTimes = cycleTimes
+        self.parentNum = parentNum
+        self.sonNumMulit = sonNumMulit
+    }
 }
 
 class OPExitInfo {
@@ -115,9 +139,9 @@ struct OPInputParam {
     }
 }
 
-///   优化器协议
-protocol Optimizer {
-    
+///   优化器类
+class Optimizer {
+    var exitinfo = OPExitInfo() // 退出原因
     /// 常用优化h方法
     ///
     /// - Parameters:
@@ -127,9 +151,51 @@ protocol Optimizer {
     ///   - argumNum: 参数个数
     ///   - option: 优化参数
     /// - Returns: (fitness: 最优个体,population: 种群,exitInfo: 结束信息)
-    func optimiz(aimFunc: @escaping ([Double])->(Double),restrain: [(([Double])->(Bool))],minAndMax:([Double],[Double]),argumNum: Int,option: OPOption) -> (fitness: OPIndividual,population: [OPIndividual],exitInfo: OPExitInfo)
+    func optimiz(aimFunc: @escaping ([Double])->(Double),restrain: [(([Double])->(Bool))],minAndMax:([Double],[Double]),argumNum: Int,option: OPOption = OPOption()) -> (fitness: OPIndividual,population: [OPIndividual],exitInfo: OPExitInfo){
+        return (OPIndividual(),[],OPExitInfo())
+    }
+    func isNotEnd(option: OPOption,currentIndex: Int) -> Bool {
+        return option.cycleTimes >= currentIndex
+    }
     
-    func optimiz(inputParam: OPInputParam)-> (fitness: OPIndividual,population: [OPIndividual],exitInfo: OPExitInfo)
+    func optimiz(inputParam: OPInputParam) -> (fitness: OPIndividual, population: [OPIndividual], exitInfo: OPExitInfo) {
+         return self.optimiz(aimFunc: inputParam.fun, restrain: self.convert(inputParam: inputParam), minAndMax: (inputParam.minArray,inputParam.maxArray), argumNum: inputParam.numberOfVar,option: OPOption())
+    }
+    func convert(inputParam: OPInputParam) -> [(([Double])->(Bool))] {
+        var  restrain = inputParam.otherRestrain
+        for item in inputParam.minArray.enumerated() {
+            restrain.append { (p) -> Bool in
+                return p[item.offset] > item.element
+            }
+        }
+        for item in inputParam.maxArray.enumerated() {
+            restrain.append { (p) -> Bool in
+                return p[item.offset] < item.element
+                
+            }
+        }
+        if let unequalA = inputParam.unEqualArrayA,let unequalB = inputParam.unEqualArrayB {
+            for item in unequalA.enumerated(){
+                if let ele =  item.element{
+                    restrain.append { (p) -> Bool in
+                        return ele * p[item.offset] - unequalB[item.offset]! > 0
+                    }
+                }
+                
+            }
+        }
+        if let equalA = inputParam.EqualArrayA, let equalB = inputParam.EqualArrayB {
+            for item in equalA.enumerated(){
+                if let ele =  item.element{
+                    restrain.append { (p) -> Bool in
+                        return ele * p[item.offset] - equalB[item.offset]! == 0
+                    }
+                }
+                
+            }
+        }
+        return restrain
+    }
 }
 
 
